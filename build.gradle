@@ -58,8 +58,8 @@ task smoke(type: Test) {
 
 task properties_tests(type: Test) {
     systemProperties(System.getProperties())
-    println "properties tests here"
-    println System.getProperty("browser")
+    println "[build.gradle] properties tests here"
+    println System.getProperty("[build.gradle] browser")
 
     useJUnitPlatform {
         includeTags 'properties'
