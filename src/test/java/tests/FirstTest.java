@@ -67,7 +67,7 @@ public class FirstTest {
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").shouldHave(text("Nika Nika"), text("Nika@nike.ru"), text("Male"),
                 text("9999999999"), text("11 November,1991"), text("Testoviy pereulochek"),
-                text("Reading"),  text("Haryana Karnal"), text("test.jpg"));
+                text("Reading"),  text("Haryana Karnal"), text("img/test.jpg"));
 
     }
 
