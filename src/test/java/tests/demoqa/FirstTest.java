@@ -35,7 +35,6 @@ public class FirstTest {
 
         Configuration.browserCapabilities = capabilities;
 
-        Configuration.baseUrl = "https://demoqa.com";
         Configuration.startMaximized = true;
         Configuration.remote = format("https://%s:%s@" + System.getProperty("url"), login, password);
     }
@@ -51,7 +50,7 @@ public class FirstTest {
 
     @Test
     void positiveFillTest() {
-        open("/automation-practice-form");
+        open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue("Nika");
         $("#lastName").setValue("Nika");
         $("#userEmail").setValue("Nika@nike.ru");
