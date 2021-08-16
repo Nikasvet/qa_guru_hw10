@@ -8,7 +8,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import static java.lang.String.format;
+import static config.Credentials.credentials;
 
+import javax.swing.*;
 import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
@@ -22,16 +25,19 @@ public class FirstTest {
     @BeforeAll
     static void setup() {
 
-
+        String login = credentials.login();
+        String password = credentials.password();
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
+
         Configuration.browserCapabilities = capabilities;
 
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.startMaximized = true;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub/";
+        Configuration.remote = format("https://%s:%s@" + System.getProperty("url"), login, password);
     }
 
     @AfterEach
@@ -58,7 +64,7 @@ public class FirstTest {
         $(".react-datepicker__day--011").click();
 
         $("#hobbiesWrapper").$(byText("Reading")).click();
-        $("#uploadPicture").uploadFile(new File("src/test/resources/test.jpg"));
+        $("#uploadPicture").uploadFile(new File("src/test/resources/img/test.jpg"));
         $("#currentAddress").setValue("Testoviy pereulochek");
         $("#react-select-3-input").setValue("Haryana").pressEnter();
         $("#react-select-4-input").setValue("Karnal").pressEnter();
@@ -67,7 +73,7 @@ public class FirstTest {
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").shouldHave(text("Nika Nika"), text("Nika@nike.ru"), text("Male"),
                 text("9999999999"), text("11 November,1991"), text("Testoviy pereulochek"),
-                text("Reading"),  text("Haryana Karnal"), text("img/test.jpg"));
+                text("Reading"),  text("Haryana Karnal"), text("test.jpg"));
 
     }
 
